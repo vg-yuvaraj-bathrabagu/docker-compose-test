@@ -1,0 +1,1 @@
+ping db1.internal.prod.example.com >> /tmp/test.txt

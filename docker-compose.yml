@@ -1,0 +1,27 @@
+version: '2'
+services:
+  app:
+    build: ./build
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    networks:
+      - mynetwork
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 'testpassword'
+      POSTGRES_USER: app_user
+      POSTGRES_DB: app
+    ports:
+      - "5600:5432"
+    networks:
+      mynetwork:
+        aliases:
+          - db1.internal.prod.example.com
+          - db2.internal.prod.example.com
+
+networks:
+  mynetwork:
+    driver: bridge
